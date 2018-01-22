@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 
@@ -44,11 +45,14 @@ public class Main extends Application {
 		
 		tableView.getColumns().addAll(nomeColumn, descColumn, valorColumn, isbnColumn);
 		
+		final VBox vbox = new VBox(tableView);
+		vbox.setPadding(new Insets(70,0,0,10));
+		
 		Label label = new Label("Listagem de Livros");
 		label.setFont(Font.font("Arial Black", FontPosture.REGULAR, 40));
-		label.setPadding(new Insets(20, 0, 10, 30));
+		label.setPadding(new Insets(10, 0, 10, 30));
 		
-		group.getChildren().addAll(label, tableView);
+		group.getChildren().addAll(label, vbox);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Sistemas da livraria com Java FX");
 		primaryStage.show();
