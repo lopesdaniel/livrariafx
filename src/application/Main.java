@@ -16,7 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 
-
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
