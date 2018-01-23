@@ -14,11 +14,5 @@ public class ConnectionFactory {
 			throw new RuntimeException(e);
 		}
 	}
-	
-	public static void main(String[] args) throws SQLException {
-		Connection conn = new ConnectionFactory().getConnection();
-		System.out.println("Conexao aberta, e agora?");
-		conn.close();
-		}
 
 }
