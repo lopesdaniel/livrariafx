@@ -1,11 +1,11 @@
 package application;
 	
 import br.com.casadocodigo.livraria.produtos.Produto;
+import dao.ProdutoDAO;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.stage.Stage;
-import repositorio.RepositorioDeProdutos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -23,7 +23,7 @@ public class Main extends Application {
 		Group group = new Group();
 		Scene scene = new Scene(group, 690, 510);
 		
-		ObservableList<Produto> produtos = new RepositorioDeProdutos().lista();
+		ObservableList<Produto> produtos = new ProdutoDAO().lista();
 		
 		TableView tableView = new TableView<>(produtos);
 		
