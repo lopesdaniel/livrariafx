@@ -1,13 +1,18 @@
 package application;
 	
+import java.io.IOException;
+
 import br.com.casadocodigo.livraria.produtos.Produto;
 import dao.ProdutoDAO;
+import io.Exportador;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.stage.Stage;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -52,10 +57,37 @@ public class Main extends Application {
 		label.setFont(Font.font("Arial Black", FontPosture.REGULAR, 40));
 		label.setPadding(new Insets(10, 0, 10, 30));
 		
-		group.getChildren().addAll(label, vbox);
+		Button button = new Button("Exportar CSV");
+		button.setLayoutX(575);
+		button.setLayoutY(25);
+		
+		button.setOnAction(event -> {
+			new Thread(() -> {
+				dormePorVinteSegundos();
+				exportaEmCSV(produtos);
+			}).start();
+		});
+		
+		group.getChildren().addAll(label, vbox, button);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Sistemas da livraria com Java FX");
 		primaryStage.show();
+	}
+	
+	private void exportaEmCSV(ObservableList<Produto> produtos){
+		try{
+			new Exportador().paraCSV(produtos);
+		}catch(IOException e){
+			System.out.println("Erro ao exportar: "+ e);
+		}
+	}
+	
+	private void dormePorVinteSegundos(){
+		try{
+			Thread.sleep(20000);
+		}catch(InterruptedException e){
+			System.out.println("Ops, ocorreu um erro: " + e);
+		}
 	}
 	
 	public static void main(String[] args) {
