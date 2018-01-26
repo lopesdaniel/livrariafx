@@ -12,4 +12,10 @@
 .button {
 	-fx-translate-x: 575;
 	-fx-translate-y: 25;
+	-fx-background-color: rgb(31, 149, 206);
+	-fx-text-fill: white; 
+}
+
+.button:hover{
+	-fx-background-color: rgba(31, 149, 206, 0.71);
 }
