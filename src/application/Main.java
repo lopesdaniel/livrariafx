@@ -58,6 +58,10 @@ public class Main extends Application {
 		label.setFont(Font.font("Arial Black", FontPosture.REGULAR, 40));
 		label.setPadding(new Insets(10, 0, 10, 30));
 		
+		Label progresso = new Label();
+		progresso.setLayoutX(485);
+		progresso.setLayoutY(30);
+		
 		Button button = new Button("Exportar CSV");
 		button.setLayoutX(575);
 		button.setLayoutY(25);
@@ -72,10 +76,13 @@ public class Main extends Application {
 					return null;
 				}
 			};
+			task.setOnRunning(e -> progresso.setText("Exportando..."));
+			task.setOnSucceeded(e -> progresso.setText("Concluído !"));
+			
 			new Thread(task).start();
 		});
 		
-		group.getChildren().addAll(label, vbox, button);
+		group.getChildren().addAll(label, progresso, vbox, button);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Sistemas da livraria com Java FX");
 		primaryStage.show();
