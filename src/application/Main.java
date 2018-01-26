@@ -7,6 +7,7 @@ import dao.ProdutoDAO;
 import io.Exportador;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.stage.Stage;
@@ -62,10 +63,16 @@ public class Main extends Application {
 		button.setLayoutY(25);
 		
 		button.setOnAction(event -> {
-			new Thread(() -> {
-				dormePorVinteSegundos();
-				exportaEmCSV(produtos);
-			}).start();
+			Task<Void> task = new Task<Void>(){
+				@Override
+				protected Void call() throws Exception{
+					dormePorVinteSegundos();
+					exportaEmCSV(produtos);
+					
+					return null;
+				}
+			};
+			new Thread(task).start();
 		});
 		
 		group.getChildren().addAll(label, vbox, button);
