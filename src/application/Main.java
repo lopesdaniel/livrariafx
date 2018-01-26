@@ -19,8 +19,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class Main extends Application {
@@ -28,6 +26,8 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		Group group = new Group();
 		Scene scene = new Scene(group, 690, 510);
+		
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		
 		ObservableList<Produto> produtos = new ProdutoDAO().lista();
 		
@@ -52,19 +52,16 @@ public class Main extends Application {
 		tableView.getColumns().addAll(nomeColumn, descColumn, valorColumn, isbnColumn);
 		
 		final VBox vbox = new VBox(tableView);
-		vbox.setPadding(new Insets(70,0,0,10));
+		vbox.setId("vbox");
 		
 		Label label = new Label("Listagem de Livros");
-		label.setFont(Font.font("Arial Black", FontPosture.REGULAR, 40));
-		label.setPadding(new Insets(10, 0, 10, 30));
+		label.setId("label-listagem");
 		
 		Label progresso = new Label();
 		progresso.setLayoutX(485);
 		progresso.setLayoutY(30);
 		
 		Button button = new Button("Exportar CSV");
-		button.setLayoutX(575);
-		button.setLayoutY(25);
 		
 		button.setOnAction(event -> {
 			Task<Void> task = new Task<Void>(){
