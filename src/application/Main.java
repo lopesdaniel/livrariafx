@@ -60,6 +60,13 @@ public class Main extends Application {
 		Label progresso = new Label();
 		progresso.setId("label-progresso");
 		
+		double valorTotal = produtos.stream().mapToDouble(Produto::getValor).sum();
+		
+		Label labelFooter = new Label(
+				String.format("Você tem R$%.2f em estoque, "+"com um total de %d produtos",
+						valorTotal, 10));
+		labelFooter.setId("label-footer");
+		
 		Button button = new Button("Exportar CSV");
 		
 		button.setOnAction(event -> {
@@ -78,7 +85,7 @@ public class Main extends Application {
 			new Thread(task).start();
 		});
 		
-		group.getChildren().addAll(label, progresso, vbox, button);
+		group.getChildren().addAll(label, progresso, labelFooter, vbox, button);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Sistemas da livraria com Java FX");
 		primaryStage.show();
