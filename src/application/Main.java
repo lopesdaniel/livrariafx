@@ -58,8 +58,7 @@ public class Main extends Application {
 		label.setId("label-listagem");
 		
 		Label progresso = new Label();
-		progresso.setLayoutX(485);
-		progresso.setLayoutY(30);
+		progresso.setId("label-progresso");
 		
 		Button button = new Button("Exportar CSV");
 		
